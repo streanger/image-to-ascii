@@ -28,7 +28,7 @@ For now only filename is passed to commandline arguments. Every other parameters
 ::
     filename		- name of image file to be converted
     target_width	- width of output image in characters
-    reverse			- reverse color flag
+    reverse		- reverse color flag
     colorized		- colorized output flag. Switch between color/black-white
     mapping_key		- key of ascii characters mapping set. Try each from 1-5
 	
