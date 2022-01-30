@@ -24,7 +24,7 @@ Run script in the following way:
 ::
     python image_to_ascii.py image.png
 	
-For now only filename is passed to commandline arguments. Every other parameters should be edited inside the script file. So if you want to set things like width, you should change it in line with calling image_to_ascii function. Each parameter is described below:
+For now only filename is passed to commandline arguments. Every other parameters should be edited inside the script file. So if you want to set things like width, you should change it in the line where image_to_ascii function is called. Each of parameters is described below:
 ::
     filename		- name of image file to be converted
     target_width	- width of output image in characters
