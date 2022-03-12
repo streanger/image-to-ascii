@@ -12,11 +12,6 @@ Install
 2. Install dependencies (PIL, termcolor) with command:
 ::
     pip install Pillow termcolor
-    
-3. Run script in the following way:
-::
-    python image_to_ascii.py image.png
-	
 	
 Usage
 ===========
