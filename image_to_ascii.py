@@ -113,7 +113,7 @@ def image_to_ascii(filename, target_width=100, reverse=True, colorized=True, map
         
     # ********* convert to ascii *********
     ascii_map = ascii_list(mapping_key)    # list with index access (consider dict)
-    if reverse:
+    if not reverse:
         ascii_map.reverse()
     img_rows = rounded.tolist()
     if colorized:
@@ -195,9 +195,8 @@ def colors_mapping_example():
     return None
     
     
-if __name__ == "__main__":
-    script_path()
-    os.system('color')
+def parse_arguments():
+    """parse commandline arguments"""
     words = 'IMAGE TO ASCII CONVERTER'.split()
     random_colors = ['green', 'red', 'yellow', 'blue', 'cyan']
     line_color = random.choice(random_colors)
@@ -213,30 +212,32 @@ if __name__ == "__main__":
                         '--width',
                        action='store',
                        default = 150,
-                       # nargs = '?',
-                       # const = 150,
                        type=int,
                        help='target ascii image width [in pixels]')
     parser.add_argument('-r',
                        '--reverse',
+                       default = False,
                        action='store_true',
                        help='reverse image color')
     parser.add_argument('-c',
                         '--color',
+                       default = False,
                        action='store_true',
                        help='colorized image flag')
     parser.add_argument('-m',
                         '--mapping',
                        action = 'store',
                        default = 3,
-                       # nargs = '?',
-                       # const = 3,
                        type=int,
                        help='mapping key [1-5]')
     parser.add_argument('-o',
                         '--output',
                        type=str,
                        help='path to output file')
+    parser.add_argument('-q',
+                        '--quiet',
+                       action='store_true',
+                       help='quiet mode - do not print image')
                        
     args = parser.parse_args()
     filename = args.file
@@ -245,21 +246,34 @@ if __name__ == "__main__":
     colorized = args.color
     mapping = args.mapping
     output = args.output
+    quiet = args.quiet
+    return filename, target_width, reverse, colorized, mapping, output, quiet
     
-    print(args)
-    sys.exit()
+    
+def main():
+    """main function"""
+    script_path()
+    if os.name == 'nt':
+        os.system('color')
+        
+    # ********* parse arguments *********
+    filename, target_width, reverse, colorized, mapping, output, quiet = parse_arguments()
+    
+    # ********* convert image to ascii image *********
+    ascii_image = image_to_ascii(filename, target_width=target_width, reverse=reverse, colorized=colorized, mapping_key=mapping)
+    
+    # ********* print to terminal *********
+    if not quiet:
+        print(ascii_image)
+        
+    # ********* save to file *********
+    if output:
+        write_file(output, ascii_image)
+    return None
     
     
-    args = sys.argv[1:]
-    if not args:
-        print(colored('[x] please specify image as argument', 'yellow'))
-        print(colored('[*] example command:', 'cyan'))
-        print(colored('    python image_to_ascii.py image.png', 'cyan'))
-        sys.exit()
-    filename = args[0]
-    ascii_image = image_to_ascii(filename, target_width=200, reverse=True, colorized=True, mapping_key=3)
-    print(ascii_image)
-    # write_file('image.txt', ascii_image)
+if __name__ == "__main__":
+    main()
     
     
 """
