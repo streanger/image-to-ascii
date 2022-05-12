@@ -3,6 +3,8 @@ import sys
 import os
 import math
 import time
+import random
+import argparse
 import numpy as np
 from PIL import Image
 from termcolor import colored
@@ -196,6 +198,57 @@ def colors_mapping_example():
 if __name__ == "__main__":
     script_path()
     os.system('color')
+    words = 'IMAGE TO ASCII CONVERTER'.split()
+    random_colors = ['green', 'red', 'yellow', 'blue', 'cyan']
+    line_color = random.choice(random_colors)
+    line_left = colored('--<', line_color)
+    line_right = colored('>--', line_color)
+    text = ' '.join([colored(item, random.choice(random_colors), None, ['reverse']) for item in words])
+    description = '{} {} {}'.format(line_left, text, line_right)
+    parser = argparse.ArgumentParser(description=description)
+    parser.add_argument('file',
+                       type=str,
+                       help='path to input file')
+    parser.add_argument('-w',
+                        '--width',
+                       action='store',
+                       default = 150,
+                       # nargs = '?',
+                       # const = 150,
+                       type=int,
+                       help='target ascii image width [in pixels]')
+    parser.add_argument('-r',
+                       '--reverse',
+                       action='store_true',
+                       help='reverse image color')
+    parser.add_argument('-c',
+                        '--color',
+                       action='store_true',
+                       help='colorized image flag')
+    parser.add_argument('-m',
+                        '--mapping',
+                       action = 'store',
+                       default = 3,
+                       # nargs = '?',
+                       # const = 3,
+                       type=int,
+                       help='mapping key [1-5]')
+    parser.add_argument('-o',
+                        '--output',
+                       type=str,
+                       help='path to output file')
+                       
+    args = parser.parse_args()
+    filename = args.file
+    target_width = args.width
+    reverse = args.reverse
+    colorized = args.color
+    mapping = args.mapping
+    output = args.output
+    
+    print(args)
+    sys.exit()
+    
     
     args = sys.argv[1:]
     if not args:
@@ -209,8 +262,12 @@ if __name__ == "__main__":
     # write_file('image.txt', ascii_image)
     
     
-'''
+"""
 useful:
     https://stackoverflow.com/questions/35902302/discarding-alpha-channel-from-images-stored-as-numpy-arrays
     https://www.kite.com/python/answers/how-to-convert-an-image-from-rgb-to-grayscale-in-python
-'''
+    https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html
+    https://realpython.com/command-line-interfaces-python-argparse/
+    https://stackoverflow.com/questions/15301147/python-argparse-default-value-or-specified-value
+    
+"""
