@@ -11,12 +11,14 @@ from termcolor import colored
 
 
 def script_path():
+    """set current path to script path"""
     current_path = os.path.realpath(os.path.dirname(sys.argv[0]))
     os.chdir(current_path)
     return current_path
     
     
 def timer(func):
+    """timer decorator for debug"""
     def f(*args, **kwargs):
         before = time.time()
         val = func(*args, **kwargs)
@@ -27,16 +29,18 @@ def timer(func):
     
     
 def rgb2gray(rgb):
+    """convert rgb image to greyscale"""
     return np.dot(rgb[...,:3], [0.2989, 0.5870, 0.1140])
     
     
 def open_image(filename):
+    """open image file"""
     img = Image.open(filename)
     return img
     
     
 def write_file(filename, text, mode='w'):
-    '''write to file'''
+    """write to file"""
     try:
         with open(filename, mode, encoding='utf-8') as f:
             f.write(text)
@@ -46,9 +50,9 @@ def write_file(filename, text, mode='w'):
     
     
 def ascii_list(key):
-    '''works as color map for image -> ascii convertion
+    """works as color map for image -> ascii convertion
     key=2 seems to be the most acurate
-    '''
+    """
     my_map = [' ',' ','.','`',',','-','-','~','"','^','*',';','i','l','=','v','x','C','P','G','&','$','O','Q','@','@','X','X','#','#',chr(0x25a0),chr(0x25a0)]   #32
     my_map = "".join([item*8 for item in my_map])
     my_map = my_map[::-1]
@@ -124,7 +128,7 @@ def image_to_ascii(filename, target_width=100, reverse=True, colorized=True, map
     
     
 def rgb_to_xyz(r, g, b):
-    '''red - 0deg, green - 120deg, blue - 240deg'''
+    """red - 0deg, green - 120deg, blue - 240deg"""
     r_vector = np.array([r, 0, r])
     g_vector = np.array([math.cos((120/360)*2*math.pi)*g, math.sin((120/360)*2*math.pi)*g, g])
     b_vector = np.array([math.cos((240/360)*2*math.pi)*b, math.sin((240/360)*2*math.pi)*b, b])
@@ -135,7 +139,7 @@ def rgb_to_xyz(r, g, b):
     
     
 def calculate_distance_xyz(x1, y1, z1, x2, y2, z2):
-    '''ok for now'''
+    """ok for now"""
     dist = math.sqrt((x2 - x1)**2 + (y2 - y1)**2 + (z2 - z1)**2)
     return dist
     
@@ -211,19 +215,9 @@ def parse_arguments():
     parser.add_argument('-w',
                         '--width',
                        action='store',
-                       default = 150,
+                       default = 100,
                        type=int,
                        help='target ascii image width [in pixels]')
-    parser.add_argument('-r',
-                       '--reverse',
-                       default = False,
-                       action='store_true',
-                       help='reverse image color')
-    parser.add_argument('-c',
-                        '--color',
-                       default = False,
-                       action='store_true',
-                       help='colorized image flag')
     parser.add_argument('-m',
                         '--mapping',
                        action = 'store',
@@ -234,6 +228,16 @@ def parse_arguments():
                         '--output',
                        type=str,
                        help='path to output file')
+    parser.add_argument('-r',
+                       '--reverse',
+                       default = False,
+                       action='store_true',
+                       help='reverse image color')
+    parser.add_argument('-c',
+                        '--color',
+                       default = False,
+                       action='store_true',
+                       help='colorized image flag')
     parser.add_argument('-q',
                         '--quiet',
                        action='store_true',
@@ -274,7 +278,6 @@ def main():
     
 if __name__ == "__main__":
     main()
-    
     
 """
 useful:
