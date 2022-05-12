@@ -15,17 +15,26 @@ Install
 	
 Usage
 ===========
-Run script in the following way:
 ::
-    python image_to_ascii.py image.png
-	
-For now only filename is passed to commandline arguments. Every other parameters should be edited inside the script file. So if you want to set things like width, you should change it in the line where image_to_ascii function is called. Each of parameters is described below:
-::
-    filename		- name of image file to be converted
-    target_width	- width of output image in characters
-    reverse		- reverse color flag
-    colorized		- colorized output flag. Switch between color/black-white
-    mapping_key		- key of ascii characters mapping set. Try each from 1-5
+
+usage: image_to_ascii.py [-h] [-w WIDTH] [-m MAPPING] [-o OUTPUT] [-r] [-c] [-q] file
+
+--< IMAGE TO ASCII CONVERTER >--
+
+positional arguments:
+  file                  path to input file
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -w WIDTH, --width WIDTH
+                        target ascii image width [in pixels]
+  -m MAPPING, --mapping MAPPING
+                        mapping key [1-5]
+  -o OUTPUT, --output OUTPUT
+                        path to output file
+  -r, --reverse         reverse image color
+  -c, --color           colorized image flag
+  -q, --quiet           quiet mode - do not print image
 	
 Example images and their convertion
 ===========
