@@ -11,7 +11,7 @@ Install
     git clone https://github.com/streanger/image_to_ascii
 2. Install dependencies (PIL, termcolor) with command:
 ::
-    pip install Pillow termcolor
+    pip install Pillow termcolor numpy
 	
 Usage
 ===========
