@@ -10,8 +10,10 @@ Install
 ::
     git clone https://github.com/streanger/image_to_ascii
 2. Install dependencies (PIL, termcolor) with command:
-::
+::bash
     pip install Pillow termcolor numpy
+    # or
+    pip install -r requirements.txt
 	
 Usage
 ===========
@@ -36,9 +38,8 @@ optional arguments:
   -c, --color           colorized image flag
   -q, --quiet           quiet mode - do not print image
 	
-Example images and their convertion
+Example
 ===========
-.. image:: images/image1.png
-.. image:: images/output1.png
-.. image:: images/image2.png
-.. image:: images/output2.png
+.. image:: images/sunflower.png
+.. image:: images/sunflower-ascii.png
+
