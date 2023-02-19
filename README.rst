@@ -40,6 +40,6 @@ optional arguments:
 	
 Example
 ===========
-.. image:: images/sunflower.png
+.. image:: images/sunflower.jpg
 .. image:: images/sunflower-ascii.png
 
