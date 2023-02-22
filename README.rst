@@ -7,10 +7,15 @@ Install
 ===========
 
 1. Copy repo (or at least image_to_ascii.py) to your local device:
-::
+
+.. code-block:: bash
+
     git clone https://github.com/streanger/image_to_ascii
+    
 2. Install dependencies (PIL, termcolor) with command:
-::bash
+
+.. code-block:: bash
+
     pip install Pillow termcolor numpy
     # or
     pip install -r requirements.txt
