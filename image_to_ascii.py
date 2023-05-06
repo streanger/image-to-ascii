@@ -78,13 +78,17 @@ def ascii_list(key):
     
     
 # @timer
-def image_to_ascii(filename, target_width=100, reverse=True, colorized=True, mapping_key=1):
+def image_to_ascii(*, filename=None, img=None, target_width=100, reverse=True, colorized=True, mapping_key=1):
     """
     target_width - ascii image width in characters
     reverse - reverse colors flag
     """
-    img = open_image(filename)      # PIL format
-    
+    if filename is not None:
+        img = open_image(filename)  # PIL format
+    else:
+        if img is None:
+            raise Exception('Either filename nor img specified')
+
     # ********* resize due to wrong width/height ratio in terminal/notepad *********
     init_width, init_height = img.size
     # width_compensation_ratio = 1.8   # npp
@@ -264,8 +268,8 @@ def main():
     filename, target_width, reverse, colorized, mapping, output, quiet = parse_arguments()
     
     # ********* convert image to ascii image *********
-    ascii_image = image_to_ascii(filename, target_width=target_width, reverse=reverse, colorized=colorized, mapping_key=mapping)
-    
+    ascii_image = image_to_ascii(filename=filename, target_width=target_width, reverse=reverse, colorized=colorized, mapping_key=mapping)
+
     # ********* print to terminal *********
     if not quiet:
         print(ascii_image)
